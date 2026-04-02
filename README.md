@@ -1,4 +1,14 @@
-## Sito web personale del mio curriculum, sviluppato in HTML e CSS, con design responsive.
+## 💼 Personal CV Website
+
+Sito web personale del mio curriculum vitae, progettato e sviluppato da zero utilizzando HTML e CSS.
+
+🎯 Obiettivo del progetto
+
+Realizzare una versione digitale del mio curriculum per:
+
+- migliorare le mie competenze tecniche  
+- presentarmi in modo professionale  
+- avere un portfolio online accessibile  
 
 <!--
 **gboncoddo/gboncoddo** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
