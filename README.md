@@ -1,4 +1,4 @@
-## Hi there 👋
+## Sito web personale del mio curriculum, sviluppato in HTML e CSS, con design responsive.
 
 <!--
 **gboncoddo/gboncoddo** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
