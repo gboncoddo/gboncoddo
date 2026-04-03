@@ -2,7 +2,7 @@
 
 Sito web personale del mio curriculum vitae, progettato e sviluppato da zero utilizzando HTML e CSS.
 
-🎯 Obiettivo del progetto
+## 🎯 Obiettivo del progetto
 
 Realizzare una versione digitale del mio curriculum per:
 
