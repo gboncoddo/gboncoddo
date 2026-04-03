@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Giuliano Boncoddo - CV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --blue-950: #0a1628;
+  --blue-900: #0f2044;
+  --blue-800: #1a3a6e;
+  --blue-700: #1e4d9a;
+  --blue-600: #2563eb;
+  --blue-500: #3b82f6;
+  --blue-400: #60a5fa;
+  --blue-300: #93c5fd;
+  --blue-100: #dbeafe;
+  --blue-50:  #eff6ff;
+
+  --gray-900: #0f172a;
+  --gray-700: #334155;
+  --gray-500: #64748b;
+  --gray-400: #94a3b8;
+  --gray-200: #e2e8f0;
+  --gray-100: #f1f5f9;
+  --gray-50:  #f8fafc;
+  --white:    #ffffff;
+
+  --sans: 'Outfit', sans-serif;
+  --mono: 'DM Mono', monospace;
+
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-pill: 999px;
+}
+
+html{scroll-behavior:smooth}
+body{
+  font-family: var(--sans);
+  background: var(--gray-50);
+  color: var(--gray-900);
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAVBAR ── */
+.nav{
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2.5rem;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--gray-200);
+}
+.nav-brand{
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--blue-700);
+  letter-spacing: -0.01em;
+}
+.nav-links{
+  display: flex; gap: 0.25rem; list-style: none;
+}
+.nav-links a{
+  font-size: 0.8rem; font-weight: 400;
+  color: var(--gray-500);
+  text-decoration: none;
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--radius-pill);
+  transition: color 0.15s, background 0.15s;
+}
+.nav-links a:hover{color: var(--blue-600); background: var(--blue-50);}
+
+.btn-download{
+  display: flex; align-items: center; gap: 0.45rem;
+  font-family: var(--sans); font-size: 0.8rem; font-weight: 500;
+  color: var(--white);
+  background: var(--blue-600);
+  border: none; border-radius: var(--radius-pill);
+  padding: 0.5rem 1.1rem;
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.15s;
+  box-shadow: 0 2px 12px rgba(37,99,235,0.3);
+}
+.btn-download:hover{background: var(--blue-700); box-shadow: 0 4px 20px rgba(37,99,235,0.4);}
+.btn-download:disabled{opacity:0.6;cursor:not-allowed;}
+
+/* ── HERO ── */
+.hero{
+  background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-700) 60%, var(--blue-500) 100%);
+  padding: 120px 2.5rem 70px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before{
+  content:'';
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse 600px 400px at 80% 50%, rgba(96,165,250,0.15), transparent),
+    radial-gradient(ellipse 300px 300px at 10% 80%, rgba(30,77,154,0.4), transparent);
+  pointer-events:none;
+}
+/* subtle dot grid */
+.hero::after{
+  content:'';
+  position:absolute; inset:0;
+  background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events:none;
+}
+
+.hero-inner{
+  max-width: 960px; margin: 0 auto;
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 2rem; align-items: end;
+}
+
+.hero-eyebrow{
+  font-family: var(--mono);
+  font-size: 0.7rem; letter-spacing: 0.15em;
+  color: var(--blue-300);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.hero-name{
+  font-size: clamp(3rem, 7vw, 5rem);
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  margin-bottom: 0.75rem;
+}
+.hero-name span{
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255,255,255,0.5);
+}
+.hero-sub{
+  font-size: 1rem; font-weight: 300;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 1.75rem;
+}
+.hero-tags{display:flex;flex-wrap:wrap;gap:0.5rem;}
+.hero-tag{
+  font-size: 0.72rem; font-weight: 500;
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--radius-pill);
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.85);
+  backdrop-filter: blur(8px);
+}
+.hero-tag.hl{background: var(--blue-500); border-color: var(--blue-400); color:#fff;}
+
+.hero-right{
+  display:flex; flex-direction:column; align-items:flex-end; gap:1rem;
+  padding-bottom:0.25rem;
+}
+.hero-stat{
+  text-align:right;
+}
+.hero-stat-num{
+  font-size:2rem; font-weight:700; color:#fff; line-height:1;
+}
+.hero-stat-label{
+  font-size:0.7rem; font-weight:400;
+  color: rgba(255,255,255,0.5);
+  letter-spacing:0.05em;
+}
+
+/* ── CONTACT BAR ── */
+.contact-bar{
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-200);
+  box-shadow: 0 1px 0 var(--gray-100);
+}
+.contact-bar-inner{
+  max-width: 960px; margin: 0 auto;
+  display: flex; flex-wrap: wrap;
+  padding: 0;
+}
+.contact-item{
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.9rem 1.5rem;
+  border-right: 1px solid var(--gray-200);
+  flex: 1; min-width: 140px;
+}
+.contact-item:last-child{border-right:none;}
+.contact-item:first-child{flex:1 0 159px;}
+.contact-icon{
+  width: 30px; height: 30px; border-radius: 8px;
+  background: var(--blue-50);
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+.contact-icon svg{width:14px;height:14px;stroke:var(--blue-600);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.contact-label{font-size:0.6rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-400);}
+.contact-val{font-size:0.8rem;font-weight:400;color:var(--gray-700);}
+.contact-val a{color:var(--blue-600);text-decoration:none;}
+.contact-val a:hover{text-decoration:underline;}
+
+/* ── PAGE BODY ── */
+.page{max-width:960px;margin:0 auto;padding:3rem 2.5rem 6rem;}
+.layout{display:grid;grid-template-columns:1fr 272px;gap:3rem;}
+
+/* ── SECTION ── */
+.section{margin-bottom:2.75rem;}
+.section-title{
+  font-size:0.65rem; font-weight:600;
+  letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--blue-600);
+  display:flex; align-items:center; gap:0.75rem;
+  margin-bottom:1.25rem;
+}
+.section-title::after{
+  content:''; flex:1; height:1px;
+  background: linear-gradient(90deg, var(--blue-100), transparent);
+}
+
+/* ── PROFILE ── */
+.profile-card{
+  background:var(--white);
+  border:1px solid var(--gray-200);
+  border-radius:var(--radius);
+  padding:1.5rem;
+  position:relative;
+  overflow:hidden;
+}
+.profile-card::before{
+  content:'';
+  position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg, var(--blue-600), var(--blue-400));
+}
+.profile-card p{font-size:0.9rem;color:var(--gray-700);line-height:1.85;}
+.profile-card p+p{margin-top:0.85rem;}
+
+/* ── EDU ── */
+.edu-item{
+  background:var(--white);
+  border:1px solid var(--gray-200);
+  border-radius:var(--radius);
+  padding:1.25rem 1.5rem;
+  margin-bottom:0.75rem;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:0 1.25rem;
+  transition:box-shadow 0.2s,border-color 0.2s;
+}
+.edu-item:hover{border-color:var(--blue-300);box-shadow:0 4px 20px rgba(37,99,235,0.08);}
+
+.edu-dot{
+  width:10px; height:10px; border-radius:50%;
+  background:var(--blue-500);
+  margin-top:0.55rem;
+  box-shadow:0 0 0 4px var(--blue-50);
+  flex-shrink:0;
+  grid-row:1/4;
+}
+.edu-degree{font-size:0.95rem;font-weight:600;color:var(--gray-900);margin-bottom:0.15rem;}
+.edu-place{font-size:0.78rem;font-weight:500;color:var(--blue-600);margin-bottom:0.4rem;}
+.edu-period{
+  display:inline-block;
+  font-family:var(--mono); font-size:0.6rem;
+  background:var(--blue-50); color:var(--blue-700);
+  border:1px solid var(--blue-100);
+  border-radius:var(--radius-pill);
+  padding:0.15rem 0.6rem;
+  margin-bottom:0.55rem;
+}
+.edu-desc{font-size:0.8rem;color:var(--gray-500);line-height:1.65;grid-column:2;}
+
+/* ── PROJECT ── */
+.project-card{
+  background:var(--white);
+  border:1px solid var(--gray-200);
+  border-radius:var(--radius);
+  padding:1.5rem;
+  transition:box-shadow 0.2s,border-color 0.2s,transform 0.2s;
+  margin-bottom:0.75rem;
+}
+.project-card:hover{
+  border-color:var(--blue-300);
+  box-shadow:0 8px 32px rgba(37,99,235,0.1);
+  transform:translateY(-2px);
+}
+.project-header{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+.project-logo{
+  width:38px;height:38px;border-radius:10px;
+  background:var(--blue-600);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.project-logo svg{width:18px;height:18px;fill:#fff;}
+.project-name{font-size:0.95rem;font-weight:600;color:var(--gray-900);}
+.project-desc{font-size:0.83rem;color:var(--gray-500);line-height:1.75;margin-bottom:1rem;}
+.project-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;}
+.project-link{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  font-size:0.78rem;font-weight:500;color:var(--blue-600);
+  text-decoration:none;
+  padding:0.4rem 0.9rem;
+  border:1px solid var(--blue-200);
+  border-radius:var(--radius-pill);
+  background:var(--blue-50);
+  transition:background 0.15s,border-color 0.15s;
+}
+.project-link:hover{background:var(--blue-100);border-color:var(--blue-400);}
+.project-chips{display:flex;gap:0.4rem;}
+.chip{
+  font-size:0.65rem;font-weight:500;
+  padding:0.2rem 0.6rem;border-radius:var(--radius-pill);
+  background:var(--gray-100);color:var(--gray-500);
+}
+
+/* ── SIDEBAR ── */
+.info-card{
+  background:var(--blue-900);
+  border-radius:var(--radius);
+  padding:1.5rem;
+  color:#fff;
+  margin-bottom:1.5rem;
+}
+.info-card-name{
+  font-size:1.1rem;font-weight:700;letter-spacing:-0.02em;
+  color:#fff;margin-bottom:0.2rem;
+}
+.info-card-role{font-size:0.78rem;color:var(--blue-300);margin-bottom:1.25rem;}
+.info-row{
+  display:flex;justify-content:space-between;
+  padding:0.45rem 0;
+  border-bottom:1px solid rgba(255,255,255,0.07);
+  font-size:0.78rem;
+}
+.info-row:last-child{border-bottom:none;}
+.info-row-k{color:rgba(255,255,255,0.45);font-weight:400;}
+.info-row-v{color:rgba(255,255,255,0.85);font-weight:500;text-align:right;}
+
+/* SKILLS */
+.sidebar-section{margin-bottom:1.75rem;}
+.sidebar-label{
+  font-size:0.6rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--gray-400);margin-bottom:0.85rem;
+}
+.skills-group+.skills-group{margin-top:1rem;}
+.skill-group-name{font-size:0.72rem;font-weight:500;color:var(--gray-700);margin-bottom:0.5rem;}
+.skills-wrap{display:flex;flex-wrap:wrap;gap:0.35rem;}
+.skill{
+  font-size:0.72rem;font-weight:400;
+  padding:0.25rem 0.65rem;
+  border-radius:var(--radius-pill);
+  background:var(--white);
+  border:1px solid var(--gray-200);
+  color:var(--gray-700);
+  transition:border-color 0.15s,color 0.15s,background 0.15s;
+}
+.skill:hover{border-color:var(--blue-400);color:var(--blue-700);background:var(--blue-50);}
+
+/* LANGUAGES */
+.lang-item{
+  display:flex;align-items:center;gap:0.85rem;
+  padding:0.55rem 0;
+  border-bottom:1px solid var(--gray-100);
+}
+.lang-item:last-child{border-bottom:none;}
+.lang-name{font-size:0.83rem;font-weight:500;color:var(--gray-700);min-width:60px;}
+.lang-track{flex:1;height:4px;background:var(--gray-200);border-radius:2px;overflow:hidden;}
+.lang-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--blue-600),var(--blue-400));}
+.lang-badge{
+  font-family:var(--mono);font-size:0.58rem;
+  color:var(--blue-700);background:var(--blue-50);
+  border:1px solid var(--blue-100);
+  border-radius:var(--radius-pill);padding:0.15rem 0.5rem;
+  white-space:nowrap;
+}
+
+/* FOOTER */
+.footer{
+  max-width:960px;margin:0 auto;
+  padding:1.25rem 2.5rem;
+  border-top:1px solid var(--gray-200);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.footer-text{font-size:0.72rem;color:var(--gray-400);}
+
+/* PRINT */
+@media print{
+  .nav{display:none!important}
+  body{background:#fff}
+  .page{padding-top:1rem}
+  .hero{padding-top:2.5rem}
+}
+
+/* MOBILE */
+@media(max-width:700px){
+  .nav-links{display:none}
+  .hero-inner{grid-template-columns:1fr}
+  .hero-right{display:none}
+  .hero{padding:100px 1.25rem 50px}
+  .contact-bar-inner{flex-direction:column}
+  .contact-item{border-right:none;border-bottom:1px solid var(--gray-200)}
+  .contact-item:last-child{border-bottom:none}
+  .page{padding:2rem 1.25rem 4rem}
+  .layout{grid-template-columns:1fr}
+  .footer{flex-direction:column;gap:0.35rem;padding:1rem 1.25rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <span class="nav-brand">Giuliano Boncoddo</span>
+  <ul class="nav-links">
+    <li><a href="#profilo">Profilo</a></li>
+    <li><a href="#formazione">Formazione</a></li>
+    <li><a href="#competenze">Competenze</a></li>
+    <li><a href="#progetti">Progetti</a></li>
+  </ul>
+  <button class="btn-download" onclick="downloadPDF()">
+    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v8M5 7l3 3 3-3M3 13h10"/></svg>
+    Scarica PDF
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <p class="hero-eyebrow">Curriculum Vitae</p>
+      <h1 class="hero-name">Giuliano<br/><span>Boncoddo</span></h1>
+      <p class="hero-sub">Studente in Informatica · Cybersecurity Enthusiast</p>
+      <div class="hero-tags">
+        <span class="hero-tag hl">Cybersecurity</span>
+        <span class="hero-tag">Informatica</span>
+        <span class="hero-tag">2° Anno</span>
+        <span class="hero-tag">Messina, IT</span>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-stat">
+        <div class="hero-stat-num"><!-- Testo o Immagine --></div>
+        <div class="hero-stat-label"><!-- Testo o Immagine --></div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num"></div>
+        <div class="hero-stat-label"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT BAR -->
+<div class="contact-bar" id="cv-content">
+  <div class="contact-bar-inner">
+    <div class="contact-item">
+      <div class="contact-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+      </div>
+      <div>
+        <div class="contact-label">Email</div>
+        <div class="contact-val"><a href="mailto:giulianoboncoddo17@gmail.com">giulianoboncoddo17@gmail.com</a></div>
+      </div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.12 6.12l1.21-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </div>
+      <div>
+        <div class="contact-label">Telefono</div>
+        <div class="contact-val">336 981 6877</div>
+      </div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon">
+        <svg viewBox="0 0 24 24" fill="var(--blue-600)" stroke="none"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      </div>
+      <div>
+        <div class="contact-label">GitHub</div>
+        <div class="contact-val"><a href="[inserire link github]" target="_blank">-</a></div>
+      </div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon">
+        <svg viewBox="0 0 24 24" fill="var(--blue-600)" stroke="none"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </div>
+      <div>
+        <div class="contact-label">LinkedIn</div>
+        <div class="contact-val"><a href="#" target="_blank">-</a></div>
+      </div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      </div>
+      <div>
+        <div class="contact-label">Posizione</div>
+        <div class="contact-val">Messina, Italia</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN PAGE -->
+<div class="page">
+  <div class="layout">
+
+    <!-- LEFT COLUMN -->
+    <div>
+
+      <!-- PROFILO -->
+      <section class="section" id="profilo">
+        <h2 class="section-title">Profilo</h2>
+        <div class="profile-card">
+          <p>Studente universitario in Informatica, attualmente iscritto al secondo anno, con un forte interesse per le tecnologie informatiche e per la sicurezza dei sistemi. Il percorso accademico intrapreso mi ha consentito di acquisire solide basi teoriche e di sviluppare un approccio analitico alla risoluzione dei problemi.</p>
+          <p>Nel corso degli studi ho approfondito diversi ambiti dell'informatica, maturando un interesse specifico per la sicurezza informatica, settore in cui intendo specializzarmi. Parallelamente, sviluppo progetti personali per consolidare le competenze tecniche e applicare in modo pratico le conoscenze acquisite.</p>
+          <p>Sono una persona orientata all'apprendimento continuo, con buone capacità organizzative e relazionali. Mi distinguo per serietà, curiosità intellettuale e capacità di adattamento a contesti nuovi e in evoluzione.</p>
+        </div>
+      </section>
+
+      <!-- FORMAZIONE -->
+      <section class="section" id="formazione">
+        <h2 class="section-title">Formazione</h2>
+
+        <div class="edu-item">
+          <div class="edu-dot"></div>
+          <div>
+            <div class="edu-degree">Laurea in Informatica <span style="font-size:0.78rem;font-weight:400;color:var(--gray-400)">(in corso)</span></div>
+            <div class="edu-place">Università degli Studi di Messina</div>
+            <span class="edu-period">2024 — Presente</span>
+          </div>
+          <p class="edu-desc">Principali aree di studio: programmazione, algoritmi e strutture dati, sistemi informativi, basi di dati. Approfondimento autonomo nell'ambito della sicurezza informatica.</p>
+        </div>
+
+
+        <div class="edu-item">
+          <div class="edu-dot"></div>
+          <div>
+            <div class="edu-degree">Diploma di Istruzione Secondaria Superiore</div>
+            <div class="edu-place">Istituto d'Istruzione Superiore A. M. Jaci - Caio Duilio Messina - Amministrazione Finanza E Marketing</div>
+            <span class="edu-period">2023</span>
+          </div>
+        </div>
+      </section>
+	  
+	  <!-- ESPERIENZE -->
+		<section class="section" id="esperienze">
+			<h2 class="section-title">Esperienze</h2>
+
+			<div class="edu-item">
+				<div class="edu-dot"></div>
+				<div>
+					<div class="edu-degree">Percorso PCTO</div>
+					<div class="edu-place">FD credit management – Servizio di recupero crediti</div>
+					<span class="edu-period">2023</span>
+				</div>
+				<p class="edu-desc">
+				Percorso per le Competenze Trasversali e per l’Orientamento svolto presso FD Credit Management, azienda operante nel settore della gestione e recupero crediti. Durante l’esperienza ho acquisito competenze nella gestione di pratiche e nell’analisi di situazioni finanziarie, sviluppando capacità di valutazione dei casi e individuazione delle soluzioni più adeguate.
+
+				Ho inoltre maturato esperienza nella comunicazione con i clienti, anche in contesti delicati, migliorando le capacità relazionali, di ascolto e di gestione delle interazioni. L’attività ha contribuito a rafforzare precisione, senso di responsabilità e organizzazione nel lavoro.
+				</p>
+			</div>
+
+      <!-- PROGETTI -->
+      <section class="section" id="progetti">
+        <h2 class="section-title">Progetti</h2>
+
+        <div class="project-card">
+          <div class="project-header">
+            <div class="project-logo">
+              <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            </div>
+            <span class="project-name">Progetti personali — GitHub</span>
+          </div>
+          <p class="project-desc">Sviluppo e pubblicazione di progetti personali volti all'applicazione pratica delle competenze acquisite durante il percorso universitario, con particolare interesse per ambiti legati alla sicurezza informatica e allo sviluppo software.</p>
+          <div class="project-footer">
+            <a class="project-link" href="[inserire link github]" target="_blank">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Visualizza su GitHub
+            </a>
+            <div class="project-chips">
+              <span class="chip">Security</span>
+              <span class="chip">Dev</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside>
+
+      <!-- INFO CARD -->
+      <div style="padding-top:0;" class="section" id="competenze">
+        <h2 class="section-title">Info</h2>
+        <div class="info-card">
+          <div class="info-card-name">Giuliano Boncoddo</div>
+          <div class="info-card-role">Computer Science Student</div>
+          <div class="info-row"><span class="info-row-k">Data di nascita</span><span class="info-row-v">17 apr 2004</span></div>
+          <div class="info-row"><span class="info-row-k">Luogo di nascita</span><span class="info-row-v">Messina</span></div>
+          <div class="info-row"><span class="info-row-k">Nazionalità</span><span class="info-row-v">Italiana</span></div>
+          <div class="info-row"><span class="info-row-k">Corso di laurea</span><span class="info-row-v">Informatica</span></div>
+          <div class="info-row"><span class="info-row-k">Anno</span><span class="info-row-v">2° / in corso</span></div>
+          <div class="info-row"><span class="info-row-k">Focus</span><span class="info-row-v" style="color:var(--blue-300)">Cybersecurity</span></div>
+        </div>
+      </div>
+
+      <!-- SKILLS -->
+      <div class="sidebar-section">
+        <div class="sidebar-label">Competenze</div>
+
+        <div class="skills-group">
+          <div class="skill-group-name">Tecniche</div>
+          <div class="skills-wrap">
+            <span class="skill">Programmazione</span>
+            <span class="skill">OS &amp; Reti</span>
+            <span class="skill">Basi di Dati</span>
+            <span class="skill">Algoritmi</span>
+            <span class="skill">Cybersecurity</span>
+            <span class="skill">Dev Tools</span>
+          </div>
+        </div>
+
+        <div class="skills-group">
+          <div class="skill-group-name">Trasversali</div>
+          <div class="skills-wrap">
+			<span class="skill">Uso PC</span>
+			<span class="skill">Word / Excel</span>
+			<span class="skill">Gestione documenti</span>
+			<span class="skill">Comunicazione</span>
+			<span class="skill">Organizzazione</span>
+            <span class="skill">Problem Solving</span>
+            <span class="skill">Self-learning</span>
+            <span class="skill">Teamwork</span>
+            <span class="skill">Organizzazione</span>
+            <span class="skill">Comunicazione</span>
+            <span class="skill">Attenzione ai dettagli</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- LINGUE -->
+      <div class="sidebar-section">
+        <div class="sidebar-label">Lingue</div>
+        <div class="lang-item">
+          <span class="lang-name">Italiano</span>
+          <div class="lang-track"><div class="lang-fill" style="width:100%"></div></div>
+          <span class="lang-badge">Madrelingua</span>
+        </div>
+        <div class="lang-item">
+          <span class="lang-name">Inglese</span>
+          <div class="lang-track"><div class="lang-fill" style="width:82%"></div></div>
+          <span class="lang-badge">Ottimo</span>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+</div>
+
+<footer class="footer">
+  <span class="footer-text">© <span id="yr"></span> Giuliano Boncoddo</span>
+  <span class="footer-text" id="upd"></span>
+</footer>
+
+<script>
+const now = new Date();
+document.getElementById('yr').textContent = now.getFullYear();
+document.getElementById('upd').textContent = 'Aggiornato: ' +
+  now.toLocaleDateString('it-IT', {month:'long', year:'numeric'});
+
+async function downloadPDF(){
+  const btn = document.querySelector('.btn-download');
+  btn.textContent = 'Generazione...';
+  btn.disabled = true;
+  const nav = document.querySelector('.nav');
+  nav.style.display = 'none';
+  try{
+    const {jsPDF} = window.jspdf;
+    const target = document.body;
+    const canvas = await html2canvas(target, {
+      scale: 2, useCORS: true,
+      backgroundColor: '#f8fafc', logging: false
+    });
+    const pdf = new jsPDF({orientation:'portrait', unit:'mm', format:'a4'});
+    const pw = pdf.internal.pageSize.getWidth();
+    const ph = pdf.internal.pageSize.getHeight();
+    const iw = canvas.width, ih = canvas.height;
+    const ratio = pw / (iw / 2 * 0.264583);
+    const slicePx = ph / (ratio * 0.264583) * 2;
+    let page = 0;
+    while(page * slicePx < ih){
+      if(page > 0) pdf.addPage();
+      const sc = document.createElement('canvas');
+      sc.width = iw;
+      const sh = Math.min(slicePx, ih - page * slicePx);
+      sc.height = sh;
+      sc.getContext('2d').drawImage(canvas, 0, page * slicePx, iw, sh, 0, 0, iw, sh);
+      const rh = sh / 2 * 0.264583 * ratio;
+      pdf.addImage(sc.toDataURL('image/jpeg', 0.95), 'JPEG', 0, 0, pw, rh);
+      page++;
+    }
+    pdf.save('Giuliano_Boncoddo_CV.pdf');
+  } catch(e){
+    alert('Errore PDF. Usa Ctrl+P → Salva come PDF come alternativa.');
+    console.error(e);
+  }
+  nav.style.display = '';
+  btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v8M5 7l3 3 3-3M3 13h10"/></svg> Scarica PDF`;
+  btn.disabled = false;
+}
+</script>
+</body>
+</html>
