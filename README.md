@@ -1,6 +1,6 @@
 ## 💼 Personal CV Website
 
-Sito web personale del mio curriculum vitae, progettato e sviluppato da zero utilizzando HTML e CSS.
+Sito web personale del mio curriculum vitae, progettato e sviluppato utilizzando HTML e CSS.
 
 ## 🎯 Obiettivo del progetto
 
