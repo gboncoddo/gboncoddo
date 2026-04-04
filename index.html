@@ -193,10 +193,10 @@ body{
   display: flex; align-items: center; gap: 0.6rem;
   padding: 0.9rem 1.5rem;
   border-right: 1px solid var(--gray-200);
-  flex: 1; min-width: 140px;
+  flex: 0 0 auto;
 }
 .contact-item:last-child{border-right:none;}
-.contact-item:first-child{flex:1 0 159px;}
+.contact-val{white-space: nowrap;}
 .contact-icon{
   width: 30px; height: 30px; border-radius: 8px;
   background: var(--blue-50);
@@ -468,7 +468,7 @@ body{
       </div>
       <div>
         <div class="contact-label">Email</div>
-        <div class="contact-val"><a href="mailto:giulianoboncoddo17@gmail.com">giulianoboncoddo17@gmail.com</a></div>
+        <div class="contact-val"><a href="/cdn-cgi/l/email-protection#eb8c829e87828a858489848588848f8f84dadcab8c868a8287c5888486"><span class="__cf_email__" data-cfemail="2c4b455940454d42434e43424f434848431d1b6c4b414d4540024f4341">giulianoboncoddo17@gmail.com</span></a></div>
       </div>
     </div>
     <div class="contact-item">
@@ -527,9 +527,26 @@ body{
         </div>
       </section>
 
+      <!-- ESPERIENZE -->
+		<section class="section" id="esperienze">
+			<h2 class="section-title">Esperienze Lavorative</h2>
+
+			<div class="edu-item">
+				<div class="edu-dot"></div>
+				<div>
+					<div class="edu-degree">Work in Progress</div>
+					<div class="edu-place">---------------------------</div>
+					<span class="edu-period">---</span>
+				</div>
+				<p class="edu-desc">
+				-----------------------
+				</p>
+			</div>
+    </section>
+
       <!-- FORMAZIONE -->
       <section class="section" id="formazione">
-        <h2 class="section-title">Formazione</h2>
+        <h2 class="section-title">Formazione Ed Esperienze Formative</h2>
 
         <div class="edu-item">
           <div class="edu-dot"></div>
@@ -541,22 +558,7 @@ body{
           <p class="edu-desc">Principali aree di studio: programmazione, algoritmi e strutture dati, sistemi informativi, basi di dati. Approfondimento autonomo nell'ambito della sicurezza informatica.</p>
         </div>
 
-
         <div class="edu-item">
-          <div class="edu-dot"></div>
-          <div>
-            <div class="edu-degree">Diploma di Istruzione Secondaria Superiore</div>
-            <div class="edu-place">Istituto d'Istruzione Superiore A. M. Jaci - Caio Duilio Messina - Amministrazione Finanza E Marketing</div>
-            <span class="edu-period">2023</span>
-          </div>
-        </div>
-      </section>
-	  
-	  <!-- ESPERIENZE -->
-		<section class="section" id="esperienze">
-			<h2 class="section-title">Esperienze</h2>
-
-			<div class="edu-item">
 				<div class="edu-dot"></div>
 				<div>
 					<div class="edu-degree">Percorso PCTO</div>
@@ -569,6 +571,18 @@ body{
 				Ho inoltre maturato esperienza nella comunicazione con i clienti, anche in contesti delicati, migliorando le capacità relazionali, di ascolto e di gestione delle interazioni. L’attività ha contribuito a rafforzare precisione, senso di responsabilità e organizzazione nel lavoro.
 				</p>
 			</div>
+
+
+        <div class="edu-item">
+          <div class="edu-dot"></div>
+          <div>
+            <div class="edu-degree">Diploma di Istruzione Secondaria Superiore</div>
+            <div class="edu-place">Istituto d'Istruzione Superiore A. M. Jaci - Caio Duilio Messina - Amministrazione Finanza E Marketing</div>
+            <span class="edu-period">2023</span>
+          </div>
+        </div>
+      </section>
+	  
 
       <!-- PROGETTI -->
       <section class="section" id="progetti">
@@ -673,7 +687,7 @@ body{
   <span class="footer-text" id="upd"></span>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const now = new Date();
 document.getElementById('yr').textContent = now.getFullYear();
 document.getElementById('upd').textContent = 'Aggiornato: ' +
@@ -716,9 +730,4 @@ async function downloadPDF(){
     console.error(e);
   }
   nav.style.display = '';
-  btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v8M5 7l3 3 3-3M3 13h10"/></svg> Scarica PDF`;
-  btn.disabled = false;
-}
-</script>
-</body>
-</html>
+  btn.innerHTML = `<s
